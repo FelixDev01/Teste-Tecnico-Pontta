@@ -1,0 +1,39 @@
+<h3>Adicionar Cliente</h3>
+
+<input type="text" [(ngModel)]="novoCliente.nome" placeholder=" nome"><input>
+<input type="text" [(ngModel)]="novoCliente.email" placeholder=" email" ><input>
+<button (click) = "adicionar()"> Adicionar </button>
+
+<hr>
+
+<h3>Buscar Cliente por ID</h3>
+
+<input type="number" [(ngModel)]="idBusca"><input>
+<button (click)="buscarPorId()">Buscar</button>
+
+<hr>
+
+<div *ngIf="clienteBuscando">
+  <h4>Resultado da busca</h4>
+  <p><b>ID:</b> {{ clienteBuscando.id }}</p>
+  <p><b>nome:</b> {{ clienteBuscando.nome }}</p>
+  <p><b>email:</b> {{ clienteBuscando.email }}</p>
+</div>
+
+<h3>Listar clientes</h3>
+
+<ul>
+  <li *ngFor = 'let c of clientes'>
+    <div *ngIf="!clienteEditando || clienteEditando.id !== c.id" >
+      <p><b>nome:</b> {{ c.nome }}</p>
+      <p><b>email:</b> {{ c.email }}</p>
+      <button (click)="editar(c)">Editar</button>
+      <button (click)="deletar(c.id!)">deletar</button>
+    </div>
+
+    <div *ngIf="clienteEditando && clienteEditando.id === c.id">
+      <input type="text" [(ngModel)]="clienteEditando.email"]>
+      <button (click)="salvarEdicao()">Salvar</button>
+    </div>
+  </li>
+</ul>
